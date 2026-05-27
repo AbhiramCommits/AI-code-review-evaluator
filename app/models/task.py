@@ -8,9 +8,12 @@ class Task(db.Model):
     title = db.Column(db.String(200), nullable=False)
     description = db.Column(db.String(500), nullable=True)
     done = db.Column(db.Boolean, default=False)
+    project_id = db.Column(db.Integer, db.ForeignKey("projects.id"), nullable=True)
+
+    project = db.relationship("Project", backref="tasks")
 
     def __repr__(self):
-        return f"<Task id={self.id} title='{self.title}' done={self.done}>"
+        return f"<Task id={self.id} title='{self.title}' done={self.done} project_id={self.project_id}>"
 
     def to_dict(self):
         return {
@@ -18,4 +21,5 @@ class Task(db.Model):
             "title": self.title,
             "description": self.description,
             "done": self.done,
+            "project_id": self.project_id,
         }

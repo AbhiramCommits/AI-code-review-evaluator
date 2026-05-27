@@ -14,8 +14,10 @@ def create_app(config_object="config.Config"):
     babel.init_app(app)
 
     from app.routes.tasks import tasks_bp
+    from app.routes.projects import projects_bp
 
     app.register_blueprint(tasks_bp)
+    app.register_blueprint(projects_bp)
 
     with app.app_context():
         db.create_all()

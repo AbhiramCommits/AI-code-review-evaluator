@@ -14,3 +14,12 @@ msgstr "Tâche introuvable."
 
 msgid "Task deleted."
 msgstr "Tâche supprimée."
+
+msgid "Name is required."
+msgstr "Le nom est requis."
+
+msgid "Project not found."
+msgstr "Projet introuvable."
+
+msgid "Invalid date format. Use YYYY-MM-DD."
+msgstr "Format de date invalide. Utilisez AAAA-MM-JJ."

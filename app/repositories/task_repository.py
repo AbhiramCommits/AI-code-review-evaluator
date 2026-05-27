@@ -12,20 +12,22 @@ class TaskRepository:
         return db.session.get(Task, task_id)
 
     @staticmethod
-    def create(title, description=None):
-        task = Task(title=title, description=description)
+    def create(title, description=None, project_id=None):
+        task = Task(title=title, description=description, project_id=project_id)
         db.session.add(task)
         db.session.commit()
         return task
 
     @staticmethod
-    def update(task, title=None, description=None, done=None):
+    def update(task, title=None, description=None, done=None, project_id=None):
         if title is not None:
             task.title = title
         if description is not None:
             task.description = description
         if done is not None:
             task.done = done
+        if project_id is not None:
+            task.project_id = project_id
         db.session.commit()
         return task
 

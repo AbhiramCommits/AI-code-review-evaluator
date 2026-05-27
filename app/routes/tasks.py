@@ -36,12 +36,14 @@ def create_task():
     Request body: JSON object with:
         - title (str, required)
         - description (str, optional)
+        - project_id (int, optional)
     Response format: JSON object representing the created task.
         {
             "id": int,
             "title": str,
             "description": str | null,
-            "done": bool
+            "done": bool,
+            "project_id": int | null
         }
     """
     data = request.get_json(silent=True)
@@ -50,6 +52,7 @@ def create_task():
     task = TaskRepository.create(
         title=data["title"],
         description=data.get("description"),
+        project_id=data.get("project_id"),
     )
     return jsonify(task.to_dict()), 201
 
@@ -67,7 +70,8 @@ def get_task(task_id):
             "id": int,
             "title": str,
             "description": str | null,
-            "done": bool
+            "done": bool,
+            "project_id": int | null
         }
     """
     task = TaskRepository.get_by_id(task_id)
@@ -86,12 +90,14 @@ def update_task(task_id):
         - title (str, optional)
         - description (str, optional)
         - done (bool, optional)
+        - project_id (int, optional)
     Response format: JSON object representing the updated task.
         {
             "id": int,
             "title": str,
             "description": str | null,
-            "done": bool
+            "done": bool,
+            "project_id": int | null
         }
     """
     task = TaskRepository.get_by_id(task_id)
@@ -103,6 +109,7 @@ def update_task(task_id):
         title=data.get("title"),
         description=data.get("description"),
         done=data.get("done"),
+        project_id=data.get("project_id"),
     )
     return jsonify(updated.to_dict()), 200
 

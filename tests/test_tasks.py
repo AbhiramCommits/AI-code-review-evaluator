@@ -32,6 +32,7 @@ def test_create_task(client):
     data = resp.get_json()
     assert data["title"] == "Buy milk"
     assert data["done"] is False
+    assert data["project_id"] is None
     assert "id" in data
 
 
@@ -104,7 +105,7 @@ def test_delete_task_not_found(client):
 def test_task_repr(app):
     """Task model has a __repr__ method."""
     task = Task(id=1, title="Hello", done=True)
-    assert repr(task) == "<Task id=1 title='Hello' done=True>"
+    assert repr(task) == "<Task id=1 title='Hello' done=True project_id=None>"
 
 
 def test_task_to_dict(app):
@@ -115,4 +116,5 @@ def test_task_to_dict(app):
         "title": "Hello",
         "description": "World",
         "done": False,
+        "project_id": None,
     }
